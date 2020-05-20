@@ -25,6 +25,8 @@
   },
   "dependencies": {
     "near-api-js": "^0.23.2",
+    "near-web3-provider": "git+https://github.com/nearprotocol/near-web3-provider.git",
+    "parcel": "^1.12.4",
     "regenerator-runtime": "^0.13.5"
   },
   "jest": {

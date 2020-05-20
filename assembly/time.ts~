@@ -1,0 +1,40 @@
+/*
+Smart contract side for time oracle
+
+Copyright Daniel Iwo 2020
+*/
+
+import {storage,context,logging} from 'near-sdk-as'
+
+
+export function init(): bool{
+	assert(storage.contains("master")==false);
+	storage.set("master",context.sender);
+	logging.log("Set master: "+context.sender);
+	return true;
+}
+
+export function txMaster(newMaster: string):bool{
+	assert(context.sender==storage.get<string>("master"));
+	logging.log("Set new master "+newMaster);
+	storage.set("newMaster",newMaster);
+	return true;
+}
+
+export function acceptMaster(): bool{
+	assert(context.sender==storage.get<string>("newMaster"));
+	logging.log("Accept new master"+context.sender);
+	storage.set("newMaster","");
+	storage.set("master",context.sender);
+	return true;
+}
+
+export function setDate(date_ts: u64): bool{
+	assert(context.sender==storage.get<string>("master"));
+	storage.set("date",date_ts);
+	return true;
+}
+
+export function getDate(): u64{
+	return storage.get<u64>("date");
+}

@@ -21,13 +21,21 @@
 await contract.init({initialOwner: walletAccount.getAccountId()})
       </pre>
       
-      <p>New saving</p>
+      <p>To check your balance:</p>
       <pre>
-      	await contract.NewSaving({})
+await contract.balanceOf({tokenOwner: walletAccount.getAccountId()})
+      </pre>
+      
+      <p>To send money:</p>
+      <pre>
+await contract.transfer({to: 'bob.near', tokens: '1000'})
       </pre>
     </div>
     <div class="time">
-
+    	<div><h1>NEAR Time contract</h1></div>
+    	<div>
+    	
+    	</div>
     </div>
     <div class="after-sign-in sign-out" style="display: none;">
       <button class="btn btn-primary">Sign Out</button>

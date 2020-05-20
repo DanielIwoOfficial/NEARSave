@@ -112,7 +112,7 @@ export function Withdraw(_index:u64,_amount:u128,to:string): bool
 			context.contractName,
 			"_checkTime",
 			itemArgs.encode(),
-			2
+			2,
 		);
 		cbPromise.returnAsResult();
 	}

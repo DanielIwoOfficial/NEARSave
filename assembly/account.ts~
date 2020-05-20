@@ -1,0 +1,77 @@
+/*
+NEAR Savings contract, save with NEAR tokens
+
+Copyright Daniel Iwo, 2020
+*/
+
+import {context,storage,logging,PersistentMap,ContractPromise} from 'near-sdk-as' 
+
+export class Saving{
+	release_time:u64;
+	amount:u64;
+	desc:string;
+	erc20:string;
+}
+
+export class TimeApi{
+	getDate():ContractPromise{
+		let promise=ContractPromise.create('neartime_slow','getDate');
+		return promise;
+	}
+}
+
+const savings=new PersistentMap<u64, Saving>("s: ");
+const release_time=new PersistentMap<u64, u64>("r: ");
+const amount=new PersistentMap<u64, u64>("a: ");
+const desc=new PersistentMap<u64, u64>("d: ");
+const saver=new PersistentMap<u64,string>("u: ");
+
+export function init(owner: string): void{
+	logging.log("owner:  "+owner);
+	
+}
+
+export function NewSaving(): bool
+{
+	u64 count=storage.get("count");
+	u64 amt=context.attachedDeposit();
+	saver.set(count,saver);
+	amount.set(count,amt);
+	release_time.set(count,rs);
+	desc.set(count,_desc);
+	storage.set("count",count+1);
+	return true;
+}
+
+export function Increment(_index:string): bool
+{
+	let amt=amount.get(_index);
+	amount.set(_index,context.attachedDeposit+amt);
+	return true;
+}
+
+export function Extend(_index:u64,new_expires:u64): bool
+{
+	assert(context.sender==saver.get(_index));
+	assert(expires.get(_index)<new_expires);
+	expires.set(_index,new_expires);
+	return true;
+}
+
+export function Withdraw(_index:u64,_amount:u64,to:string): bool
+{
+	assert(context.sender==saver.get(_index));
+	assert(amount.get(_index)>=_amount);
+		
+	return true;
+}
+
+function _norm(amt:u64): u64
+{
+	
+}
+
+export function setNorm(perc:u64): bool
+{
+
+}

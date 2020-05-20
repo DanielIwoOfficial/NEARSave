@@ -1,0 +1,15 @@
+
+export class ERC20Api{
+	transferFrom(token:string,from:string,to:string,amount:u64): ContractPromise{
+		let args={from,to,amount};
+		let promise=ContractPromise.create(token,'transferFrom',args.encode(),100000000000000);
+		return promise;
+	}
+
+	transfer(token:string,to:string,amount:u64): ContractPromise{
+		let args={to,amount};
+		let promise=ContractPromise.create(token,'transfer',args.encode(),100000000000000);	
+		return promise;
+	}
+
+}
